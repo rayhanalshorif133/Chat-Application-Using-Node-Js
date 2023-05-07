@@ -1,4 +1,5 @@
 const multer = require("multer");
+const path = require("path");
 
 
 function uploader(upload_path,allowed_file_types,max_file_size,error_msg) {
