@@ -1,12 +1,8 @@
 const multer = require("multer");
 
 
-function uploader(
-  upload_path,
-  allowed_file_types,
-  max_file_size,
-  error_msg
- ) {
+function uploader(upload_path,allowed_file_types,max_file_size,error_msg) {
+
  const UPLOAD_FOLDER = `${__dirname}/../public/uploads/${upload_path}/`;
 
  // define the storage
@@ -40,6 +36,7 @@ function uploader(
    }
   },
  });
+ 
  return upload;
 }
  
