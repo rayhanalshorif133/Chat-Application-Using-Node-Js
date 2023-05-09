@@ -1,3 +1,5 @@
+
+const User = require("../../models/People");
 const jwt = require('jsonwebtoken');
 
 
@@ -6,7 +8,6 @@ const checkedLogin = (req, res, next) => {
     Object.keys(req.signedCookies).length > 0 ? req.signedCookies : null;
 
     if(cookies){
-
        try {
         token = cookies[process.env.COOKIE_NAME];
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
