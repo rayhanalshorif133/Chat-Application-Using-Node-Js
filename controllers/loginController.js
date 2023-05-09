@@ -9,6 +9,7 @@ const User = require('../models/People');
 
 // view login page
 function getLogin(req, res, next) {
+    console.log("this is login");
     res.render('index');
 }
 

@@ -24,6 +24,7 @@ const dbConnection = () => {
    })
    .then(function () {
      console.log("Database connected");
+     return true;
    })
    .catch(function (err) {
      console.log(err);
