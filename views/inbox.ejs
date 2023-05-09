@@ -9,7 +9,7 @@
           <!-- conversation creator is same to logged in user, so we need to show participant name and avatar -->
           <% if(conversation.creator.id == loggedInUser.userid) { %>
             
-            <div class="conversation" onclick="">
+            <div class="conversation" onclick="getMessages('<%= conversation._id %>', '<%= conversation.participant.name %>')">
               <% if (conversation.participant.avatar) { %>
               <img src="./uploads/avatars/<%= conversation.participant.avatar %>" alt="<%= conversation.participant.name %>" />
               <% } else { %>
@@ -102,7 +102,6 @@
           }
 
           attachments += '</div>';
-
           let messageHTML;
 
           // do not show avatar for loggedin user
@@ -129,6 +128,9 @@
       // get messages of a conversation
       async function getMessages(conversation_id, current_conversation_name){
 
+
+        console.log(conversation_id, current_conversation_name);
+
         // messages failure toast
         const messagesFailureToast = Toastify({
           text: "Error loading messages!",
@@ -137,6 +139,7 @@
 
         let response = await fetch(`/inbox/messages/${conversation_id}`);
         const result= await response.json();
+
 
         if(!result.errors && result.data) {
             form.style.visibility = 'visible';

@@ -57,6 +57,33 @@ const redirectLoggedIn = (req, res, next) => {
 };
 
 
+function requireRole(roles) {
+    return function(req, res, next){
+        if(req.user && roles.includes(req.user.role)){
+            next();
+        }else{
+
+            if(res.locals.html){
+                res.render('pages/error', {
+                    title: 'Error',
+                    message: 'Unauthorized!',
+                    info: 'You are not authorized to access this resource. Your current role is ' + req.user.role,
+                });
+            }else{
+            res.status(401).json({
+                errors:{
+                    common:{
+                        msg: 'Unauthorized!',
+                        info: 'You are not authorized to access this resource. Your current role is ' + req.user.role,
+                    },
+                },
+              });
+            }
+        }
+    }
+};
 
 
-module.exports = {checkedLogin,redirectLoggedIn};
+
+
+module.exports = {checkedLogin,redirectLoggedIn,requireRole};
